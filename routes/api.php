@@ -22,3 +22,4 @@ Route::get('/', function () {
     return response()->json(['welcome' => 'to the API']);
 });
 Route::get('/users', [UserController::class, 'index'])->name('users.index');
+Route::post('/users', [UserController::class, 'store'])->name('users.store');
