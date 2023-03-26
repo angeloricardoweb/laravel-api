@@ -13,7 +13,7 @@ class UserController extends Controller
     public function index()
     {
         $user = User::paginate(10);
-        return new UserResource($user);
+        return UserResource::collection($user);
     }
 
     public function store(StoreUpdateUserRequest $request)
@@ -31,6 +31,13 @@ class UserController extends Controller
         $data['password'] = bcrypt($request->password);
 
         $user = User::create($data);
+
+        return new UserResource($user);
+    }
+
+    public function show(string $id)
+    {
+        $user = User::findOrFail($id);
 
         return new UserResource($user);
     }
